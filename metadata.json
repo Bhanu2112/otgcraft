@@ -1,0 +1,6 @@
+{
+  "name": "OTG Craft",
+  "description": "Premium Mobile Videography & Custom Surprise Micro-Websites startup based in Hyderabad.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
