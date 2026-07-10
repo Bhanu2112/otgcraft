@@ -70,7 +70,7 @@ Please let me know if you have an open crew slot available and what the custom q
 
     const encodedText = encodeURIComponent(textMessage);
     // Open WhatsApp URL (using standard support number 918008800880)
-    window.open(`https://wa.me/918008800880?text=${encodedText}`, "_blank");
+    window.open(`https://wa.me/918688962339?text=${encodedText}`, "_blank");
   };
 
   return (
