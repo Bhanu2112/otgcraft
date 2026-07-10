@@ -7,7 +7,7 @@ export default function Hero() {
     const message = encodeURIComponent(
       "Hi OTG Craft! I saw your stunning premium landing page and would love to check slot availability for an upcoming shoot in Hyderabad!"
     );
-    window.open(`https://wa.me/918008800880?text=${message}`, "_blank");
+    window.open(`https://wa.me/918688962339?text=${message}`, "_blank");
   };
 
   const scrollToServices = () => {
