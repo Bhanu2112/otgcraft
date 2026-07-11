@@ -40,10 +40,7 @@ export default function BookingWizard() {
       return;
     }
 
-    const packageLabel = 
-      packageSelection === "reel" 
-        ? "⚡ The OTG Reel - Single Creator"
-        : "🎥 The Multi-Angle Cinematic Reel - Dual Creators";
+    const packageLabel = "⚡ The OTG Reel - Single Creator Setup";
 
     const loc = neighborhood === "Other Location" ? (customLocation || "Hyderabad") : neighborhood;
 
@@ -69,8 +66,17 @@ ${formattedAddonsText}
 Please let me know if you have an open crew slot available and what the custom quote would be. Thanks!`;
 
     const encodedText = encodeURIComponent(textMessage);
-    // Open WhatsApp URL (using standard support number 918008800880)
-    window.open(`https://wa.me/918688962339?text=${encodedText}`, "_blank");
+    const whatsappUrl = `https://wa.me/918688962339?text=${encodedText}`;
+
+    // Robust redirection: try window.open first, if blocked or fails, fall back to window.location.href
+    try {
+      const newWin = window.open(whatsappUrl, "_blank");
+      if (!newWin || newWin.closed || typeof newWin.closed === "undefined") {
+        window.location.href = whatsappUrl;
+      }
+    } catch (err) {
+      window.location.href = whatsappUrl;
+    }
   };
 
   return (
@@ -80,16 +86,16 @@ Please let me know if you have an open crew slot available and what the custom q
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs text-cyber-lime font-mono mb-4">
-            <Video className="h-3.5 w-3.5 animate-pulse" />
+        <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16 px-2">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-[10px] sm:text-xs text-cyber-lime font-mono mb-4 tracking-wider uppercase font-semibold">
+            <Video className="h-3.5 w-3.5 animate-pulse shrink-0" />
             <span>INSTANT DEALS BUILDER</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-extrabold text-white tracking-tight mb-4">
+          <h2 className="text-2xl sm:text-4xl md:text-5xl font-display font-extrabold text-white tracking-tight mb-4 leading-[1.3] sm:leading-tight">
             Build Your Custom Package & <span className="text-cyber-lime">Secure a Slot.</span>
           </h2>
-          <p className="text-gray-400 text-base sm:text-lg">
-            Tell us about your upcoming Hyderabad gig, birthday, or celebration. Select your packages, customize add-ons, and get an instant personalized quote directly from our event manager.
+          <p className="text-gray-400 text-xs sm:text-sm md:text-base leading-[1.6] sm:leading-relaxed max-w-2xl mx-auto">
+            Tell us about your upcoming Hyderabad gig, marriage/wedding, birthday, or casual timepass reels. We offer the most affordable vertical 4K packages with zero quality compromises.
           </p>
         </div>
 
@@ -98,11 +104,12 @@ Please let me know if you have an open crew slot available and what the custom q
           
           {/* Form Side - Left Column */}
           <form 
+            id="booking-form"
             onSubmit={handleBookWhatsApp}
-            className="lg:col-span-7 space-y-6 rounded-2xl glass-card p-6 sm:p-8"
+            className="lg:col-span-7 space-y-6 rounded-2xl glass-card p-4 sm:p-8"
           >
             <div className="border-b border-white/5 pb-4">
-              <h3 className="text-xl font-display font-bold text-white flex items-center gap-2">
+              <h3 className="text-lg sm:text-xl font-display font-bold text-white flex items-center gap-2">
                 <Sparkles className="h-5 w-5 text-cyber-lime" />
                 <span>Onboarding Details</span>
               </h3>
@@ -112,7 +119,7 @@ Please let me know if you have an open crew slot available and what the custom q
             {/* Client name & phone */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-xs font-semibold text-gray-300 uppercase tracking-wider mb-2 font-mono">YOUR FULL NAME *</label>
+                <label className="block text-[10px] sm:text-xs font-semibold text-gray-300 uppercase tracking-wider mb-2 font-mono">YOUR FULL NAME *</label>
                 <input
                   type="text"
                   required
@@ -124,7 +131,7 @@ Please let me know if you have an open crew slot available and what the custom q
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-gray-300 uppercase tracking-wider mb-2 font-mono">WHATSAPP PHONE NUMBER</label>
+                <label className="block text-[10px] sm:text-xs font-semibold text-gray-300 uppercase tracking-wider mb-2 font-mono">WHATSAPP PHONE NUMBER</label>
                 <input
                   type="tel"
                   placeholder="e.g. +91 80088 00880"
@@ -138,11 +145,11 @@ Please let me know if you have an open crew slot available and what the custom q
             {/* Event Details & Location row */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-xs font-semibold text-gray-300 uppercase tracking-wider mb-2 font-mono">EVENT VIBE & TYPE *</label>
+                <label className="block text-[10px] sm:text-xs font-semibold text-gray-300 uppercase tracking-wider mb-2 font-mono">EVENT VIBE & TYPE *</label>
                 <input
                   type="text"
                   required
-                  placeholder="e.g. Birthday Party, Acoustic Live Show, Club Bash"
+                  placeholder="e.g. Wedding / Marriage, Birthday Party, Timepass / Casual Reels"
                   value={eventDetails}
                   onChange={(e) => setEventDetails(e.target.value)}
                   className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-cyber-lime transition-all"
@@ -150,11 +157,11 @@ Please let me know if you have an open crew slot available and what the custom q
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-gray-300 uppercase tracking-wider mb-2 font-mono">HYDERABAD NEIGHBORHOOD</label>
+                <label className="block text-[10px] sm:text-xs font-semibold text-gray-300 uppercase tracking-wider mb-2 font-mono">HYDERABAD NEIGHBORHOOD</label>
                 <select
                   value={neighborhood}
                   onChange={(e) => setNeighborhood(e.target.value)}
-                  className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-cyber-lime transition-all"
+                  className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-cyber-lime transition-all text-gray-300"
                 >
                   {HYD_NEIGHBORHOODS.map((nh, index) => (
                     <option key={index} value={nh} className="bg-studio-dark text-white">
@@ -168,7 +175,7 @@ Please let me know if you have an open crew slot available and what the custom q
             {/* Custom Location input if other chosen */}
             {neighborhood === "Other Location" && (
               <div className="animate-fade-in">
-                <label className="block text-xs font-semibold text-gray-300 uppercase tracking-wider mb-2 font-mono">SPECIFY NEIGHBORHOOD OR LOCATION</label>
+                <label className="block text-[10px] sm:text-xs font-semibold text-gray-300 uppercase tracking-wider mb-2 font-mono">SPECIFY NEIGHBORHOOD OR LOCATION</label>
                 <div className="relative">
                   <MapPin className="absolute left-4 top-3.5 h-4 w-4 text-cyber-lime" />
                   <input
@@ -183,44 +190,25 @@ Please let me know if you have an open crew slot available and what the custom q
               </div>
             )}
 
-            {/* 2. Package selection */}
+            {/* 2. Package selection (Simplified to primary flagship package) */}
             <div>
-              <label className="block text-xs font-semibold text-gray-300 uppercase tracking-wider mb-3 font-mono">CHOOSE YOUR PRODUCTION SERVICE</label>
-              
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                {/* Reel package */}
-                <button
-                  type="button"
-                  onClick={() => setPackageSelection("reel")}
-                  className={`p-4 rounded-xl border text-left transition-all cursor-pointer relative flex flex-col justify-between h-32 ${
-                    packageSelection === "reel"
-                      ? "border-cyber-lime bg-cyber-lime/10 animate-pulse-subtle"
-                      : "border-white/5 bg-white/[0.01] hover:border-white/10"
-                  }`}
-                >
-                  <div>
-                    <span className="block font-bold text-sm text-white">⚡ The OTG Reel</span>
-                    <span className="text-[11px] text-gray-400 mt-1 block leading-tight">Single-camera high-energy vertical 4K coverage.</span>
-                  </div>
-                  <span className="text-xs text-cyber-lime font-mono font-bold uppercase mt-2">● Single Angle Setup</span>
-                </button>
-
-                {/* Multicam package */}
-                <button
-                  type="button"
-                  onClick={() => setPackageSelection("multicam")}
-                  className={`p-4 rounded-xl border text-left transition-all cursor-pointer relative flex flex-col justify-between h-32 ${
-                    packageSelection === "multicam"
-                      ? "border-cyber-lime bg-cyber-lime/10 animate-pulse-subtle"
-                      : "border-white/5 bg-white/[0.01] hover:border-white/10"
-                  }`}
-                >
-                  <div>
-                    <span className="block font-bold text-sm text-white">🎥 Cinematic Multi-Cam</span>
-                    <span className="text-[11px] text-gray-400 mt-1 block leading-tight">Dual-camera synchronized multicam with pro sound.</span>
-                  </div>
-                  <span className="text-xs text-cyber-lime font-mono font-bold uppercase mt-2">● Dual Angle Setup</span>
-                </button>
+              <label className="block text-[10px] sm:text-xs font-semibold text-gray-300 uppercase tracking-wider mb-2 font-mono">BASE PRODUCTION PACKAGE</label>
+              <div className="p-4 rounded-xl border border-cyber-lime/30 bg-cyber-lime/[0.04] relative overflow-hidden">
+                <div className="absolute top-0 right-0 bg-cyber-lime/10 text-cyber-lime text-[10px] uppercase font-mono font-bold px-2.5 py-1 rounded-bl-xl border-l border-b border-cyber-lime/20">
+                  FLAGSHIP BASE
+                </div>
+                <div>
+                  <span className="block font-extrabold text-sm sm:text-base text-white flex items-center gap-2">
+                    ⚡ The OTG Reel (Single Creator)
+                  </span>
+                  <span className="text-xs text-gray-400 mt-1.5 block leading-relaxed">
+                    Stunning single-camera high-energy vertical 4K coverage. Shot on flagship iPhone/Android sensors, custom color graded, and delivered on-the-go with instant on-site turnaround.
+                  </span>
+                </div>
+                <div className="mt-3.5 pt-3 border-t border-white/5 flex items-center justify-between text-xs font-mono">
+                  <span className="text-gray-400">Setup Configuration:</span>
+                  <span className="text-cyber-lime font-bold uppercase">Single Creator Setup</span>
+                </div>
               </div>
             </div>
 
@@ -271,73 +259,72 @@ Please let me know if you have an open crew slot available and what the custom q
               <div className="absolute top-0 right-0 h-32 w-32 bg-cyber-lime/[0.02] rounded-full translate-x-12 -translate-y-12" />
 
               <div className="border-b border-white/5 pb-4 mb-4">
-                <span className="text-[10px] font-mono text-cyber-lime uppercase tracking-widest">LIVE CONFIGURATION SUMMARY</span>
-                <h3 className="text-lg font-display font-bold text-white mt-1">Event Config Summary</h3>
+                <span className="text-xs font-mono text-cyber-lime uppercase tracking-widest font-semibold block">LIVE CONFIGURATION SUMMARY</span>
+                <h3 className="text-xl font-display font-extrabold text-white mt-1">Event Config Summary</h3>
               </div>
 
-              <div className="space-y-3.5 text-xs">
+              <div className="space-y-4 text-sm">
                 
                 {/* Base selection detail row */}
-                <div className="flex justify-between text-gray-300">
+                <div className="flex justify-between text-gray-200">
                   <div>
-                    <span className="font-semibold block text-white">
-                      {packageSelection === "reel" 
-                        ? "⚡ Base: The OTG Reel Only" 
-                        : "🎥 Base: Cinematic Multi-Cam"}
+                    <span className="font-bold block text-sm sm:text-base text-white">
+                      ⚡ Base: The OTG Reel Only
                     </span>
-                    <span className="text-[10px] text-gray-500 font-mono">Includes dynamic color grade & edit</span>
+                    <span className="text-xs text-gray-400 font-mono mt-1 block">Includes dynamic color grade & edit</span>
                   </div>
                 </div>
 
                 {/* List of checked add-ons */}
                 {selectedAddonIds.length > 0 ? (
-                  <div className="pt-2 border-t border-white/5 space-y-2">
-                    <span className="text-[10px] font-mono text-gray-500 uppercase tracking-widest block font-bold">CHOSEN UPGRADES</span>
+                  <div className="pt-3 border-t border-white/5 space-y-2.5">
+                    <span className="text-xs font-mono text-gray-400 uppercase tracking-widest block font-bold">CHOSEN UPGRADES</span>
                     {ADDONS.filter((a) => selectedAddonIds.includes(a.id)).map((addon) => (
-                      <div key={addon.id} className="flex justify-between text-gray-400">
+                      <div key={addon.id} className="flex justify-between items-center text-gray-300 text-xs sm:text-sm">
                         <span>{addon.name}</span>
-                        <span className="font-mono text-[10px] text-cyber-lime font-bold uppercase">Included</span>
+                        <span className="font-mono text-xs text-cyber-lime font-bold uppercase bg-cyber-lime/10 px-2 py-0.5 rounded">Included</span>
                       </div>
                     ))}
                   </div>
                 ) : (
-                  <div className="pt-2 border-t border-white/5 text-[10px] text-gray-500 font-mono italic">
+                  <div className="pt-3 border-t border-white/5 text-xs text-gray-500 font-mono italic">
                     No custom upgrades checked.
                   </div>
                 )}
 
                 {/* Grand Total glowing row */}
                 <div className="pt-6 border-t border-white/10 mt-6 text-center">
-                  <div className="text-gray-400 font-mono text-xs mb-2 uppercase tracking-widest">Pricing Model</div>
-                  <div className="text-xl font-display font-black text-cyber-lime px-4 py-2.5 rounded-lg bg-cyber-lime/10 border border-cyber-lime/20 inline-block leading-tight uppercase tracking-wider">
-                    Custom Manual Quote
+                  <div className="text-gray-400 font-mono text-xs mb-2 uppercase tracking-widest font-bold">INAUGURAL DEAL</div>
+                  <div className="text-xl sm:text-2xl font-display font-black text-cyber-lime px-5 py-3 rounded-xl bg-cyber-lime/10 border border-cyber-lime/20 inline-block leading-tight uppercase tracking-wider">
+                    🎁 25% Launch Discount!
                   </div>
-                  <span className="block text-[10px] text-gray-500 font-mono mt-2">Discussed & finalized directly on WhatsApp</span>
+                  <span className="block text-xs text-gray-200 font-mono mt-2.5 font-bold">Special Introductory Offer Applied on Booking!</span>
+                  <span className="block text-[11px] text-gray-400 mt-1 max-w-xs mx-auto">Get high-quality vertical reels at super-budget rates, customized & discussed directly on WhatsApp.</span>
                 </div>
 
               </div>
 
               {/* Submit CTA */}
               <button
-                type="button"
-                onClick={handleBookWhatsApp}
-                className="w-full mt-6 py-4 rounded-xl bg-cyber-lime hover:bg-cyber-lime-hover text-black font-bold tracking-wide transition-all shadow-[0_4px_20px_rgba(204,255,0,0.2)] hover:shadow-[0_8px_30px_rgba(204,255,0,0.45)] hover:-translate-y-0.5 flex items-center justify-center gap-2 cursor-pointer text-sm"
+                type="submit"
+                form="booking-form"
+                className="w-full mt-6 py-4 rounded-xl bg-cyber-lime hover:bg-cyber-lime-hover text-black font-bold tracking-wide transition-all shadow-[0_4px_20px_rgba(204,255,0,0.2)] hover:shadow-[0_8px_30px_rgba(204,255,0,0.45)] hover:-translate-y-0.5 flex items-center justify-center gap-2 cursor-pointer text-sm sm:text-base active:scale-95 animate-pulse-subtle"
               >
                 <MessageCircle className="h-5 w-5 fill-current" />
                 <span>Request Availability & Quote</span>
               </button>
 
-              <div className="mt-4 flex items-center gap-2 justify-center text-[10px] text-gray-400 font-mono">
-                <ShieldCheck className="h-4 w-4 text-cyber-lime" />
+              <div className="mt-4 flex items-center gap-2 justify-center text-xs text-gray-300 font-mono">
+                <ShieldCheck className="h-4 w-4 text-cyber-lime shrink-0" />
                 <span>Zero pre-payment required to check slots!</span>
               </div>
             </div>
 
             {/* Micro FAQ notice */}
-            <div className="p-4 rounded-xl bg-white/[0.01] border border-white/5 flex gap-3 items-start text-xs">
-              <Info className="h-4 w-4 text-cyber-lime shrink-0 mt-0.5" />
-              <div className="text-gray-400 leading-relaxed">
-                <p className="font-bold text-gray-300">How scheduling works:</p>
+            <div className="p-4 rounded-xl bg-white/[0.01] border border-white/5 flex gap-3 items-start text-xs sm:text-sm">
+              <Info className="h-4.5 w-4.5 text-cyber-lime shrink-0 mt-0.5" />
+              <div className="text-gray-300 leading-relaxed">
+                <p className="font-bold text-white mb-1">How scheduling works:</p>
                 Once you click to send details, your prefilled package structure is loaded directly to our WhatsApp support inbox. We will instantly verify if a creator is free in your requested neighborhood and provide a custom pricing breakdown.
               </div>
             </div>

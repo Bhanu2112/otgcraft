@@ -20,15 +20,15 @@ export default function FAQ() {
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Header */}
-        <div className="text-center max-w-2xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs text-cyber-lime font-mono mb-4">
-            <HelpCircle className="h-3.5 w-3.5" />
+        <div className="text-center max-w-2xl mx-auto mb-12 sm:mb-16 px-2">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-[10px] sm:text-xs text-cyber-lime font-mono mb-4 tracking-wider uppercase font-semibold">
+            <HelpCircle className="h-3.5 w-3.5 shrink-0" />
             <span>COMMONLY ASKED QUESTIONS</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-display font-extrabold text-white tracking-tight mb-4">
+          <h2 className="text-2xl sm:text-4xl font-display font-extrabold text-white tracking-tight mb-4 leading-[1.3] sm:leading-tight">
             Got Questions? <span className="text-cyber-lime">We've Got Answers.</span>
           </h2>
-          <p className="text-gray-400 text-sm sm:text-base">
+          <p className="text-gray-400 text-xs sm:text-sm md:text-base leading-[1.6] sm:leading-relaxed">
             Everything you need to know about our mobile workflows, turnaround timing, surprise page domain hosting, and locations inside Hyderabad.
           </p>
         </div>

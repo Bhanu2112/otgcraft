@@ -37,14 +37,14 @@ export default function ProcessTimeline() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-20">
-          <span className="text-xs text-cyber-lime font-mono uppercase tracking-widest bg-white/5 border border-white/10 px-3 py-1 rounded-full">
+        <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16 px-2">
+          <span className="text-[10px] sm:text-xs text-cyber-lime font-mono uppercase tracking-wider bg-white/5 border border-white/10 px-3 py-1 rounded-full font-semibold">
             OUR LEAN PRODUCTION WORKFLOW
           </span>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-extrabold text-white tracking-tight mt-4">
+          <h2 className="text-2xl sm:text-4xl md:text-5xl font-display font-extrabold text-white tracking-tight mt-4 leading-[1.3] sm:leading-tight">
             Zero Friction. <span className="text-cyber-lime">Infinite Vibes.</span>
           </h2>
-          <p className="text-gray-400 text-base sm:text-lg mt-3">
+          <p className="text-gray-400 text-xs sm:text-sm md:text-base leading-[1.6] sm:leading-relaxed mt-3 max-w-2xl mx-auto">
             We've stripped away the heavy layers of traditional video crews. Here's how we deliver premium social-first content in record time.
           </p>
         </div>
@@ -54,14 +54,14 @@ export default function ProcessTimeline() {
           {/* Symmetrical connecting dashed line on desktop */}
           <div className="hidden lg:block absolute top-[45px] left-[10%] right-[10%] h-[1px] border-t border-dashed border-white/10 z-0" />
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-10 relative z-10">
             {steps.map((step, idx) => {
               const IconComponent = step.icon;
               return (
                 <div key={idx} className="group relative">
                   
                   {/* Timeline Node Icon Head */}
-                  <div className="flex justify-center lg:justify-start mb-6">
+                  <div className="flex justify-center lg:justify-start mb-4 sm:mb-6">
                     <div className="relative">
                       {/* Ambient circle glow */}
                       <div 
@@ -69,11 +69,11 @@ export default function ProcessTimeline() {
                         style={{ backgroundColor: step.glowColor }}
                       />
                       {/* Active Icon container */}
-                      <div className="relative h-20 w-20 rounded-2xl bg-[#121218] border border-white/10 flex items-center justify-center text-white group-hover:border-cyber-lime transition-all group-hover:scale-105">
-                        <IconComponent className="h-9 w-9 text-cyber-lime group-hover:animate-pulse" />
+                      <div className="relative h-16 w-16 sm:h-20 sm:w-20 rounded-2xl bg-[#121218] border border-white/10 flex items-center justify-center text-white group-hover:border-cyber-lime transition-all group-hover:scale-105">
+                        <IconComponent className="h-7 w-7 sm:h-9 sm:w-9 text-cyber-lime group-hover:animate-pulse" />
                         
                         {/* Static Step number badge */}
-                        <span className="absolute -bottom-2 -right-2 h-6 w-8 bg-black border border-white/10 rounded-md flex items-center justify-center font-mono font-bold text-[11px] text-cyber-lime">
+                        <span className="absolute -bottom-1.5 -right-1.5 sm:-bottom-2 sm:-right-2 h-5 w-7 sm:h-6 sm:w-8 bg-black border border-white/10 rounded-md flex items-center justify-center font-mono font-bold text-[10px] sm:text-[11px] text-cyber-lime">
                           {step.number}
                         </span>
                       </div>
@@ -81,14 +81,14 @@ export default function ProcessTimeline() {
                   </div>
 
                   {/* Step Description Content */}
-                  <div className="p-6 rounded-2xl bg-white/[0.01] border border-white/5 group-hover:border-white/10 group-hover:bg-white/[0.02] transition-all text-center lg:text-left">
-                    <span className="text-[10px] font-mono text-cyber-lime uppercase tracking-widest font-semibold">
+                  <div className="p-4 sm:p-6 rounded-2xl bg-white/[0.01] border border-white/5 group-hover:border-white/10 group-hover:bg-white/[0.02] transition-all text-center lg:text-left">
+                    <span className="text-[9px] sm:text-[10px] font-mono text-cyber-lime uppercase tracking-widest font-semibold">
                       STEP {step.number} • {step.highlight}
                     </span>
-                    <h3 className="text-xl font-display font-extrabold text-white mt-1 group-hover:text-cyber-lime transition-colors">
+                    <h3 className="text-lg sm:text-xl font-display font-extrabold text-white mt-1 group-hover:text-cyber-lime transition-colors">
                       {step.title}
                     </h3>
-                    <p className="text-gray-400 text-xs sm:text-sm leading-relaxed mt-3">
+                    <p className="text-gray-400 text-xs sm:text-sm leading-relaxed mt-2.5 sm:mt-3">
                       {step.description}
                     </p>
                   </div>

@@ -6,7 +6,17 @@ export default function Footer() {
     const text = encodeURIComponent(
       "Hi OTG Craft! I saw your stunning landing page and would love to check slot availability for an upcoming mobile shoot!"
     );
-    window.open(`https://wa.me/918008800880?text=${text}`, "_blank");
+    const whatsappUrl = `https://wa.me/918688962339?text=${text}`;
+
+    // Robust redirection: try window.open first, if blocked or fails, fall back to window.location.href
+    try {
+      const newWin = window.open(whatsappUrl, "_blank");
+      if (!newWin || newWin.closed || typeof newWin.closed === "undefined") {
+        window.location.href = whatsappUrl;
+      }
+    } catch (err) {
+      window.location.href = whatsappUrl;
+    }
   };
 
   const scrollToSection = (id: string) => {
@@ -23,22 +33,24 @@ export default function Footer() {
       <div className="absolute top-0 left-1/3 w-64 h-64 bg-cyber-lime/[0.01] rounded-full blur-3xl pointer-events-none" />
 
       {/* FINAL PITCH / HERO FOOTER BANNER */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center border-b border-white/5 relative z-10">
-        <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-extrabold text-white tracking-tight mb-4">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 text-center border-b border-white/5 relative z-10">
+        <h2 className="text-2xl sm:text-4xl md:text-5xl font-display font-extrabold text-white tracking-tight mb-4 leading-[1.3] sm:leading-tight">
           Let's Craft Something <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyber-lime to-white">Unforgettable.</span>
         </h2>
-        <p className="text-gray-400 text-sm sm:text-base max-w-2xl mx-auto mb-8">
+        <p className="text-gray-400 text-xs sm:text-sm md:text-base leading-[1.6] sm:leading-relaxed max-w-2xl mx-auto mb-6 sm:mb-8 px-2 sm:px-0">
           Ready to capture premium social-first vertical reels on flagship smartphone devices? Let's get moving!
         </p>
 
         {/* Pulsing button */}
-        <button
-          onClick={handleWhatsAppFooter}
-          className="px-8 py-4 rounded-xl bg-cyber-lime hover:bg-cyber-lime-hover text-black font-bold tracking-wide transition-all shadow-[0_0_20px_rgba(204,255,0,0.2)] hover:shadow-[0_0_35px_rgba(204,255,0,0.45)] hover:-translate-y-0.5 inline-flex items-center gap-2.5 cursor-pointer text-sm sm:text-base active:scale-95 group relative overflow-hidden"
-        >
-          <MessageCircle className="h-5 w-5 fill-current animate-pulse" />
-          <span>WhatsApp Us to Book</span>
-        </button>
+        <div className="flex justify-center">
+          <button
+            onClick={handleWhatsAppFooter}
+            className="w-full max-w-[280px] sm:w-auto px-5 py-3 sm:px-8 sm:py-4 rounded-xl bg-cyber-lime hover:bg-cyber-lime-hover text-black font-bold tracking-wide transition-all shadow-[0_0_20px_rgba(204,255,0,0.2)] hover:shadow-[0_0_35px_rgba(204,255,0,0.45)] hover:-translate-y-0.5 inline-flex items-center justify-center gap-2.5 cursor-pointer text-xs sm:text-base active:scale-95 group relative overflow-hidden"
+          >
+            <MessageCircle className="h-4.5 w-4.5 fill-current animate-pulse" />
+            <span>WhatsApp Us to Book</span>
+          </button>
+        </div>
       </div>
 
       {/* FOOTER DIRECTORIES */}
